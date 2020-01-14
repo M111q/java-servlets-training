@@ -19,7 +19,7 @@ public class HelloServiceTest {
 
         var result = SUT.prepareGreeting(null);
 
-        assertEquals("Hello " + HelloService.DEFAULT_NAME + "!", result);
+        assertEquals("Hello " + HelloService.FALLBACK_NAME + "!", result);
     }
 
     @Test
