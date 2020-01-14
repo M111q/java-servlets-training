@@ -13,6 +13,8 @@ import java.io.IOException;
 @WebServlet(name = "Hello", urlPatterns = {"/api/*"})
 public class HelloServlet extends HttpServlet {
     private static final String REQ_PARAM_NAME = "name";
+    private static final String REQ_PARAM_LANG = "lang";
+
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
 
     private HelloService service;
@@ -32,6 +34,9 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Request got, parameters: " + req.getParameterMap());
-        resp.getWriter().write(service.prepareGreeting(req.getParameter(REQ_PARAM_NAME)));
+
+        var parameterName = req.getParameter(REQ_PARAM_NAME);
+        var parameterLang = req.getParameter(REQ_PARAM_LANG);
+        resp.getWriter().write(service.prepareGreeting(parameterName, parameterLang));
     }
 }
