@@ -4,7 +4,7 @@ import java.util.Optional;
 
 class HelloService {
 
-    private static final String DEFAULT_NAME = "world";
+    static final String DEFAULT_NAME = "world";
 
     String prepareGreeting(String name) {
         return "Hello " + Optional.ofNullable(name).orElse(DEFAULT_NAME) + "!";
