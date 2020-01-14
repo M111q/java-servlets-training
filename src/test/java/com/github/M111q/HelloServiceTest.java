@@ -10,7 +10,7 @@ public class HelloServiceTest {
     private HelloService SUT;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         SUT = new HelloService();
     }
 
