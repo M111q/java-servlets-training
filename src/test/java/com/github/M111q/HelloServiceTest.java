@@ -1,6 +1,5 @@
 package com.github.M111q;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -67,6 +66,30 @@ public class HelloServiceTest {
         // then
         assertEquals(FALLBACK_ID_WELCOME + " " + HelloService.FALLBACK_NAME + "!", result);
     }
+
+    // test_prepareGreeting_nonExistingLang_returnsGreetingWithFallbackLang
+
+    @Test
+    public void test_prepareGreeting_ShouldReturnDefaultLangGreeting_emptyLang() {
+        // given
+        String wrongLangId = "test";
+        var mockRepository = alwaysReturnEmptyRepository();
+        var SUT = new HelloService(mockRepository);
+        // when
+        var result = SUT.prepareGreeting(null, "-1");
+        // then
+        assertEquals(HelloService.FALLBACK_LANG.getWelcomeMsg() + " " + HelloService.FALLBACK_NAME + "!", result);
+    }
+
+    private LangRepository alwaysReturnEmptyRepository() {
+        return new LangRepository() {
+            @Override
+            Optional<Lang> findById(Long langId) {
+                return Optional.empty();
+            }
+        };
+    }
+
 
     private LangRepository fallbackLangIdRepository() {
         return new LangRepository() {
