@@ -1,10 +1,25 @@
 package com.github.M111q;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "LANGUAGES")
 class Lang {
 
+    @Id
+    @GeneratedValue(generator="inc")
+    @GenericGenerator(name="inc", strategy = "increment")
     private Integer id;
     private String welcomeMsg;
     private String code;
+
+    public Lang() {
+    }
 
     public Lang(Integer id, String welcomeMsg, String code) {
         this.id = id;
