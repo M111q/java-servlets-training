@@ -10,12 +10,12 @@ public class LangRepository {
 
     LangRepository() {
         languages = new ArrayList<>();
-        languages.add(new Lang(1L, "Witaj", "pl"));
-        languages.add(new Lang(2L, "Hello", "en"));
-        languages.add(new Lang(3L, "Willkommen", "de"));
+        languages.add(new Lang(1, "Witaj", "pl"));
+        languages.add(new Lang(2, "Hello", "en"));
+        languages.add(new Lang(3, "Willkommen", "de"));
     }
 
-    Optional<Lang> findById(Long langId) {
+    Optional<Lang> findById(Integer langId) {
         return languages
                 .stream()
                 .filter(lang -> lang.getId().equals(langId))

@@ -84,7 +84,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturnEmptyRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Long langId) {
+            Optional<Lang> findById(Integer langId) {
                 return Optional.empty();
             }
         };
@@ -94,7 +94,7 @@ public class HelloServiceTest {
     private LangRepository fallbackLangIdRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Long langId) {
+            Optional<Lang> findById(Integer langId) {
                 if (langId.equals(HelloService.FALLBACK_LANG.getId())) {
                     return Optional.of((new Lang(null, FALLBACK_ID_WELCOME, null)));
                 }
@@ -107,7 +107,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturningHelloLangRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Long langId) {
+            Optional<Lang> findById(Integer langId) {
                 return Optional.of(new Lang(null, WELCOME_MSG, null));
             }
         };
