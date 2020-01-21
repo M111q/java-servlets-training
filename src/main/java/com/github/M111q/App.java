@@ -13,7 +13,7 @@ public class App {
 
         var webapp = new WebAppContext();
 
-        webapp.setResourceBase("src/main/");
+        webapp.setResourceBase("src/main/webapp");
         webapp.setContextPath("/");
         webapp.setConfigurations(new Configuration[]
                 {

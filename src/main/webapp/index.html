@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
+          integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <title>Simple frontend</title>
+</head>
+<body>
+<h1>simle front</h1>
+<form id="lang-form" class="pure-form pure-form-aligned" style="width: 50%; margin: 0 auto;">
+    <div class="pure-control-group">
+        <label for="name">Username</label>
+        <input id="name" name="name" type="text" placeholder="Username">
+    </div>
+
+    <div>
+        <label for="option-two" class="pure-radio">
+            <input id="option-two" type="radio" name="lang" value="1" checked>
+            jezyk1
+        </label>
+
+        <label for="option-three" class="pure-radio">
+            <input id="option-three" type="radio" name="lang" value="2">
+            jezyk2
+        </label>
+    </div>
+    <button id="btn" class="pure-button pure-button-primary">Submit</button>
+    <div id="message"></div>
+</form>
+<script>
+    const form = document.getElementById('lang-form');
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+
+        const name = form.elements.name.value;
+        const lang = form.elements.lang.value;
+
+        const formObj = {
+            name: name,
+            lang: lang
+        };
+
+        //alert(new URLSearchParams(formObj));
+
+        fetch('http://localhost:8080/api?' + new URLSearchParams(formObj))
+            .then(response => response.text())
+            .then((text) => {
+                const msg = document.getElementById('message');
+                msg.innerHTML = `
+                <h1>${text}</h1>
+                `;
+            })
+    });
+
+</script>
+</body>
+</html>
