@@ -1,6 +1,7 @@
-package com.github.M111q;
+package com.github.M111q.lang;
 
-import java.util.ArrayList;
+import com.github.M111q.HibernateUtil;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class LangRepository {
 
 //todo refactor
 
-    Optional<Lang> findById(Integer langId) {
+    public Optional<Lang> findById(Integer langId) {
         var session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
 

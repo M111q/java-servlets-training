@@ -1,5 +1,7 @@
-package com.github.M111q;
+package com.github.M111q.hello;
 
+import com.github.M111q.lang.Lang;
+import com.github.M111q.lang.LangRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,5 +1,8 @@
-package com.github.M111q;
+package com.github.M111q.hello;
 
+import com.github.M111q.hello.HelloService;
+import com.github.M111q.lang.Lang;
+import com.github.M111q.lang.LangRepository;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -84,7 +87,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturnEmptyRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Integer langId) {
+            public Optional<Lang> findById(Integer langId) {
                 return Optional.empty();
             }
         };
@@ -94,7 +97,7 @@ public class HelloServiceTest {
     private LangRepository fallbackLangIdRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Integer langId) {
+            public Optional<Lang> findById(Integer langId) {
                 if (langId.equals(HelloService.FALLBACK_LANG.getId())) {
                     return Optional.of((new Lang(null, FALLBACK_ID_WELCOME, null)));
                 }
@@ -107,7 +110,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturningHelloLangRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Integer langId) {
+            public Optional<Lang> findById(Integer langId) {
                 return Optional.of(new Lang(null, WELCOME_MSG, null));
             }
         };
