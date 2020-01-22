@@ -14,23 +14,31 @@
         <input id="name" name="name" type="text" placeholder="Username">
     </div>
 
-    <div>
-        <label for="option-two" class="pure-radio">
-            <input id="option-two" type="radio" name="lang" value="1" checked>
-            jezyk1
-        </label>
+    <fieldset id="langs">
 
-        <label for="option-three" class="pure-radio">
-            <input id="option-three" type="radio" name="lang" value="2">
-            jezyk2
-        </label>
-    </div>
+
+    </fieldset>
+
     <button id="btn" class="pure-button pure-button-primary">Submit</button>
     <div id="message"></div>
 </form>
 <script>
+
+    const API_URL = 'http://localhost:8080/api';
+
     const form = document.getElementById('lang-form');
     const btn = document.getElementById('btn');
+
+    fetch(`${API_URL}/langs`).then(response => response.json()).then((langArr) => {
+        const radiobuttons = langArr.map(l => `
+         <label for="option-three" class="pure-radio">
+            <input id="option-three" type="radio" name="lang" value="${l.id}">
+            ${l.code}
+         </label>
+        `).join('\n');
+        document.getElementById('langs').innerHTML = radiobuttons;
+    });
+
     btn.addEventListener('click', (event) => {
         event.preventDefault();
 
@@ -44,8 +52,7 @@
         };
 
         //alert(new URLSearchParams(formObj));
-
-        fetch('http://localhost:8080/api?' + new URLSearchParams(formObj))
+        fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
             .then(response => response.text())
             .then((text) => {
                 const msg = document.getElementById('message');
