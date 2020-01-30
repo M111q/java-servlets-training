@@ -34,4 +34,22 @@ public class TodoServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         mapper.writeValue(resp.getOutputStream(), repository.findAll());
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String pathInfo = req.getPathInfo();
+        Integer todoId = null;
+        try {
+            pathInfo = pathInfo.substring(1);
+            todoId = Integer.valueOf(pathInfo);
+
+            resp.setContentType("application/json;charset=UTF-8");
+            mapper.writeValue(resp.getOutputStream(),repository.toggleTodo(todoId));
+        } catch (NumberFormatException e) {
+            logger.warn("wrong todo Id format (non numeric) " + pathInfo);
+        } catch (StringIndexOutOfBoundsException e) {
+            logger.warn("wrong todo Id format (empty string) " + pathInfo);
+        }
+
+    }
 }

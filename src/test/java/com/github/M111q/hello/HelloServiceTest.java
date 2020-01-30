@@ -14,16 +14,6 @@ public class HelloServiceTest {
     public static final String WELCOME_MSG = "Hello";
     public static final String FALLBACK_ID_WELCOME = "Hola";
 
-    private HelloService SUT;
-
-/*
-    @Before
-    public void setUp() {
-        SUT = new HelloService();
-
-    }
-*/
-
     @Test
     public void test_prepareGreeting_ShouldReturnDefaultGreeting() {
         // given
