@@ -30,7 +30,7 @@ public class HelloServiceTest {
         var mockRepository = alwaysReturningHelloLangRepository();
         var SUT = new HelloService(mockRepository);
         // when
-        var result = SUT.prepareGreeting(null, "-1");
+        var result = SUT.prepareGreeting(null, -1);
         // then
         assertEquals(WELCOME_MSG + " " + HelloService.FALLBACK_NAME + "!", result);
     }
@@ -42,7 +42,7 @@ public class HelloServiceTest {
         var SUT = new HelloService(mockRepository);
         String name = "test";
         // when
-        var result = SUT.prepareGreeting(name, "-1");
+        var result = SUT.prepareGreeting(name, -1);
         // then
         assertEquals(WELCOME_MSG + " " + name + "!", result);
     }
@@ -57,6 +57,7 @@ public class HelloServiceTest {
         // then
         assertEquals(FALLBACK_ID_WELCOME + " " + HelloService.FALLBACK_NAME + "!", result);
     }
+/*
 
     @Test
     public void test_prepareGreeting_ShouldReturnDefaultLangGreeting_textLang() {
@@ -69,6 +70,7 @@ public class HelloServiceTest {
         // then
         assertEquals(FALLBACK_ID_WELCOME + " " + HelloService.FALLBACK_NAME + "!", result);
     }
+*/
 
     // test_prepareGreeting_nonExistingLang_returnsGreetingWithFallbackLang
 
@@ -79,7 +81,7 @@ public class HelloServiceTest {
         var mockRepository = alwaysReturnEmptyRepository();
         var SUT = new HelloService(mockRepository);
         // when
-        var result = SUT.prepareGreeting(null, "-1");
+        var result = SUT.prepareGreeting(null, -1);
         // then
         assertEquals(HelloService.FALLBACK_LANG.getWelcomeMsg() + " " + HelloService.FALLBACK_NAME + "!", result);
     }

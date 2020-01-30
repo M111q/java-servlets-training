@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(name = "Hello", urlPatterns = {"/api"})
 public class HelloServlet extends HttpServlet {
@@ -37,6 +38,14 @@ public class HelloServlet extends HttpServlet {
 
         var parameterName = req.getParameter(REQ_PARAM_NAME);
         var parameterLang = req.getParameter(REQ_PARAM_LANG);
-        resp.getWriter().write(service.prepareGreeting(parameterName, parameterLang));
+
+        Integer langId = null;
+        try {
+            langId = Integer.valueOf(parameterLang);
+        } catch (NumberFormatException e) {
+            logger.warn("wrong lang Id format (non numeric) " + parameterLang);
+        }
+
+        resp.getWriter().write(service.prepareGreeting(parameterName, langId));
     }
 }

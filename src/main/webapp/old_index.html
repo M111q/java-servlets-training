@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
+          integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <title>Simple frontend</title>
+</head>
+<body>
+<h1>simle front</h1>
+<form id="lang-form" class="pure-form pure-form-aligned" style="width: 50%; margin: 0 auto;">
+    <div class="pure-control-group">
+        <label for="name">Username</label>
+        <input id="name" name="name" type="text" placeholder="Username">
+    </div>
+
+    <fieldset id="langs">
+
+
+    </fieldset>
+
+    <button id="btn" class="pure-button pure-button-primary">Submit</button>
+    <div id="message"></div>
+</form>
+<script>
+
+    const API_URL = 'http://localhost:8080/api';
+
+    const form = document.getElementById('lang-form');
+    const btn = document.getElementById('btn');
+
+    fetch(`${API_URL}/langs`).then(response => response.json()).then((langArr) => {
+        const radiobuttons = langArr.map(l => `
+         <label for="option-three" class="pure-radio">
+            <input id="option-three" type="radio" name="lang" value="${l.id}">
+            ${l.code}
+         </label>
+        `).join('\n');
+        document.getElementById('langs').innerHTML = radiobuttons;
+    });
+
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+
+        const name = form.elements.name.value;
+        const lang = form.elements.lang.value;
+
+        const formObj = {
+            name: name,
+            lang: lang
+        };
+
+        //alert(new URLSearchParams(formObj));
+        fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
+            .then(response => response.text())
+            .then((text) => {
+                const msg = document.getElementById('message');
+                msg.innerHTML = `
+                <h1>${text}</h1>
+                `;
+            })
+    });
+
+</script>
+</body>
+</html>
